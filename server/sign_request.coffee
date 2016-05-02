@@ -14,7 +14,7 @@ Meteor.methods
 			path:""
 			bucket:S3.config.bucket
 			acl:"public-read"
-			region:S3.config.region
+			region:S3.config.region || "us-standard"
 
 		check ops,
 			expiration:Number
@@ -77,6 +77,3 @@ calculate_signature = (policy) ->
 	crypto.createHmac("sha1", S3.config.secret)
 		.update(new Buffer(policy, "utf-8"))
 		.digest("base64")
-
-
-
